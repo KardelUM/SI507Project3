@@ -177,7 +177,7 @@ def process_command(command):
 
 
 def load_help_text():
-    with open('Proj3Help.txt') as f:
+    with open('help.txt') as f:
         return f.read()
 
 
@@ -267,7 +267,7 @@ def interactive_prompt():
                     d["Country Name"].append(item[0])
                     d["Region Name"].append(item[1])
                     d[value_attr].append(item[2])
-            print(d)
+            # print(d)
             df = pd.DataFrame(d)
             if barplot:
                 if isCompany:
@@ -277,7 +277,7 @@ def interactive_prompt():
                 fig = px.bar(df, x=name, y=value_attr)
                 fig.show()
 
-        else:
+        elif response.startswith("regions"):
             int_pattern = "{:<16}{:n}"
             float_pattern = "{:<16}{:.1f}"
             value_attr = ""
@@ -302,6 +302,9 @@ def interactive_prompt():
             if barplot:
                 fig = px.bar(df, x="Region Name", y=value_attr)
                 fig.show()
+
+        else:
+            print("Command not recognized:", response)
         response = None
 
 
